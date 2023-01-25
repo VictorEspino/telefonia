@@ -105,7 +105,60 @@
                                     </a>
                                 </div>         
                              </div>
-                        
+                             <div class="text pt-2">
+                                <i class="fas fa-tasks"></i>
+                                Inventario
+                            </div>
+                            <div class="flex flex-col">
+                                <div class="pl-5 pt-2 text-lime-300">
+                                    <a href="{{route('cargar_inventario')}}">
+                                        <span class="text-blue-400"><i class="fas fa-upload"></i></span>
+                                         Cargar nuevos equipos
+                                    </a>
+                                </div>     
+                                <div class="pl-5 pt-2 text-lime-300">
+                                    <a href="{{route('base_inventario')}}">
+                                        <span class="text-red-400"><i class="fas fa-warehouse"></i></span>
+                                         Sucursal
+                                    </a>
+                                </div>       
+                             </div>
+                             <div class="text pt-2">
+                                <i class="fas fa-tasks"></i>
+                                Gastos
+                            </div>
+                            <div class="flex flex-col">
+                                <div class="pl-5 pt-2 text-lime-300">
+                                    <a href="{{route('dashboard')}}">
+                                        <span class="text-green-500"><i class="far fa-money-bill-alt"></i></span>
+                                         Registrar Gasto
+                                    </a>
+                                </div>        
+                             </div>
+                             <div class="text pt-2">
+                                <i class="fas fa-tasks"></i>
+                                Comisiones
+                            </div>
+                            <div class="flex flex-col">
+                                <div class="pl-5 pt-2 text-lime-300">
+                                    <a href="{{route('dashboard')}}">
+                                        <span class="text-green-500"><i class="far fa-money-bill-alt"></i></span>
+                                         Pagos de Comisiones
+                                    </a>
+                                </div>        
+                             </div>
+                             <div class="text pt-2">
+                                <i class="fas fa-tasks"></i>
+                                Reportes
+                            </div>
+                            <div class="flex flex-col">
+                                <div class="pl-5 pt-2 text-lime-300">
+                                    <a href="{{route('dashboard')}}">
+                                        <span class="text-yellow-500"><i class="fas fa-print"></i></span>
+                                         Reportes
+                                    </a>
+                                </div>        
+                             </div>
                             <div class="px-3 text-[#383c3f] flex flex-col">.
                             </div>
                             <div class="px-3 text-[#383c3f] flex flex-col">.
