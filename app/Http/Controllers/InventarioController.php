@@ -36,7 +36,6 @@ class InventarioController extends Controller
     {
         //return($request->all());
         $filtro_text='';
-        $proveedor='';
         $asignacion='';
         $filtro=false;
         $excel="NO";
@@ -44,7 +43,6 @@ class InventarioController extends Controller
         {
             $filtro=true;
             $filtro_text=$_GET["query"];
-            $proveedor=$_GET["proveedor"];
             $asignacion=$_GET["asignacion"];
             $excel=$_GET["excel"];
         }
@@ -57,11 +55,6 @@ class InventarioController extends Controller
                         {
                             $query->where('asignacion',$asignacion);
                         })
-                        ->when ($proveedor>0,function ($query) use ($proveedor)
-                        {
-                            $query->where('proveedor',$proveedor);
-                        })
-
                         ->when (Auth::user()->puesto!='ADMIN',function ($query)
                         {
                             $query->where('asignacion',Auth::user()->locacion);
@@ -85,10 +78,6 @@ class InventarioController extends Controller
                         {
                             $query->where('asignacion',$asignacion);
                         })
-                        ->when ($proveedor>0,function ($query) use ($proveedor)
-                        {
-                            $query->where('proveedor',$proveedor);
-                        })
                         ->when (Auth::user()->puesto!='ADMIN',function ($query)
                         {
                             $query->where('asignacion',Auth::user()->locacion);
@@ -110,7 +99,6 @@ class InventarioController extends Controller
                     'filtro'=>'ACTIVE',
                     'query' => $filtro_text,
                     'asignacion'=>$asignacion,
-                    'proveedor'=>$proveedor,
                     ]);   
         }            
         $locaciones=Locacion::orderBy('nombre')
@@ -119,6 +107,6 @@ class InventarioController extends Controller
                         $query->where('id',Auth::user()->locacion);
                     })
                     ->get();
-        return(view($excel=="NO"?'inventario.base_inventario':'inventario.export',['registros'=>$registros,'query'=>$filtro_text,'asignacion'=>$asignacion,'proveedor'=>$proveedor,'excel'=>$excel,'locaciones'=>$locaciones]));
+        return(view($excel=="NO"?'inventario.base_inventario':'inventario.export',['registros'=>$registros,'query'=>$filtro_text,'asignacion'=>$asignacion,'excel'=>$excel,'locaciones'=>$locaciones]));
     }
 }

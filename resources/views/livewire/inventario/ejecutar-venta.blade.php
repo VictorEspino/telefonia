@@ -51,12 +51,13 @@
                             <x-jet-label class="font-bold text-red-500 text-base" value="Datos de venta - Enganche {{number_format(100*$porcentaje_enganche,2)}}%" />
                         </div>
                         <div class="w-1/2">
-                            <select class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm py-1" name="proveedor_servicio" wire:model.defer="proveedor_servicio">
+                            <select class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm py-1" name="proveedor_servicio" wire:model="proveedor_servicio">
                                 <option value="" class=""></option>
                                 @foreach($proveedores_servicio as $prov)
                                 <option value="{{$prov->nombre}}" class="" >{{$prov->nombre}}</option>
                                 @endforeach
                             </select>  
+                            @error('proveedor_servicio') <span class="text-xs text-red-400">{{ $message }}</span> @enderror
                         </div> 
                     </div>
                 </div>
@@ -124,14 +125,16 @@
                                         <option value="{{$prov->descripcion}}" class="" >{{$prov->descripcion}}</option>
                                         @endforeach
                                     </select>  
+                                    @error('servicio_telefonico') <span class="text-xs text-red-400">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="w-1/4 px-3">
                                     <x-jet-label value="Portabilidad" />
-                                    <select class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm py-1" name="servicio_telefonico" wire:model.defer="servicio_telefonico">
+                                    <select class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm py-1" name="portabilidad" wire:model.defer="portabilidad">
                                         <option value="" class=""></option>
-                                        <option value="NO" class="">NO</option>
-                                        <option value="SI" class="">SI</option>
+                                        <option value="0" class="">NO</option>
+                                        <option value="1" class="">SI</option>
                                     </select>  
+                                    @error('portabilidad') <span class="text-xs text-red-400">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                         </div>

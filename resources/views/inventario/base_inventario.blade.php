@@ -28,14 +28,7 @@
                             @endforeach
                         </select>  
                     </div>
-                    <div class="w-1/6">
-                        <x-jet-label class="text-white text-sm">Proveedor</x-jet-label>
-                        <select class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm py-1" name="proveedor">
-                            <option value="" class=""></option>
-                            <option value="1" class="" {{$proveedor=='1'?'selected':''}}>PAYJOY</option>
-                            <option value="2" class="" {{$proveedor=='2'?'selected':''}}>KrediYA</option>                    
-                        </select>  
-                    </div>
+
                     @if(Auth::user()->puesto=='ADMIN')
                     <div class="w-1/12">
                         <x-jet-label class="text-white text-sm">Excel</x-jet-label>

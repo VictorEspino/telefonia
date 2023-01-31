@@ -13,5 +13,13 @@ class Venta extends Model
             'user_id',
             'cliente',
             'enganche',
-            'forma_pago'];
+            'forma_pago',
+            'telefono',
+            'precio_equipo',
+            'tipo_servicio',
+            'portabilidad',
+            'precio_servicio',
+            'proveedor',
+            'iccid',
+        ];
 }

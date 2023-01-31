@@ -46,19 +46,32 @@ class EjecutarVenta extends Component
     public $precio_servicio=0;
     public $iccid;
     public $total_pago;
+    public $portabilidad;
 
     public function render()
-    {   if($this->precio>0 && $this->enganche!="")
+    {   
+        return view('livewire.inventario.ejecutar-venta');
+    }
+    public function updatedEnganche()
+    {
+        $this->validate([
+            'enganche' => 'required|numeric|min:1',
+        ],
+        [
+            'required' => 'Campo requerido.',
+            'numeric'=>'Debe ser un numero',
+            'min'=>'Valor invalido'
+        ]);
+        if($this->precio>0 && $this->enganche!="")
         {
-        $this->porcentaje_enganche=$this->enganche/$this->precio;
+                $this->porcentaje_enganche=$this->enganche/$this->precio;   
         }
         else
         {
             $this->porcentaje_enganche=0;
         }
-        return view('livewire.inventario.ejecutar-venta');
+        
     }
-
     public function mount($id_inventario)
     {
         $this->id_inventario=$id_inventario;
@@ -102,10 +115,16 @@ class EjecutarVenta extends Component
         $this->imei="";
         $this->enganche="";
         $this->cliente="";
+        $this->telefono="";
+        $this->portabilidad="";
+        $this->precio_equipo="";
         $this->forma_pago="EFECTIVO";
         $this->porcentaje_enganche=0;
         $this->locacion_actual="";
         $this->precios_servicio=[];
+        $this->proveedor_servicio="";
+        $this->servicio_telefonico="SIN SERVICIO";
+        $this->resetErrorBag();
     }
     public function guardar()
     {
@@ -113,6 +132,11 @@ class EjecutarVenta extends Component
             'cliente' => 'required',
             'enganche' => 'required|numeric|min:1',
             'forma_pago' => 'required',
+            'proveedor_servicio' => 'required',
+            'telefono' => 'required|numeric',
+            'precio_equipo'=>'required|numeric',
+            'portabilidad'=>'required',
+            'servicio_telefonico'=>'required'
         ],
         [
             'required' => 'Campo requerido.',
@@ -131,6 +155,13 @@ class EjecutarVenta extends Component
             'cliente'=>$this->cliente,
             'enganche'=>$this->enganche,
             'forma_pago'=>$this->forma_pago,
+            'telefono'=>$this->telefono,
+            'precio_equipo'=>$this->precio_equipo,
+            'tipo_servicio'=>$this->servicio_telefonico,
+            'portabilidad'=>$this->portabilidad,
+            'precio_servicio'=>$this->precio_servicio,
+            'proveedor'=>$this->proveedor_servicio,
+            'iccid'=>$this->iccid,
         ]);
         
         Inventario::where('id',$this->id_inventario)->update([
@@ -153,5 +184,13 @@ class EjecutarVenta extends Component
     public function updatedPrecioServicio()
     {
         $this->total_pago=$this->precio_equipo+$this->precio_servicio;
+    }
+    public function updatedProveedorServicio()
+    {
+        if($this->proveedor_servicio=="CONTADO")
+        {
+            $this->enganche=$this->precio;
+            $this->porcentaje_enganche=$this->enganche/$this->precio;   
+        }
     }
 }
