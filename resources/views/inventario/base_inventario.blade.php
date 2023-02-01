@@ -19,7 +19,7 @@
                         <x-jet-input class="w-full py-1" type="text" name="query" value="{{$query}}" placeholder=""></x-jet-input>
                     </div>
                     
-                    <div class="w-1/6">
+                    <div class="w-1/4">
                         <x-jet-label class="text-white text-sm">Asignacion</x-jet-label>
                         <select class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm py-1" name="asignacion">
                             <option value="" class=""></option>
@@ -58,7 +58,6 @@
                         <td class="border border-gray-300 font-semibold bg-slate-600 text-gray-200 p-1 text-sm"></td>
                         <td class="border border-gray-300 font-semibold bg-slate-600 text-gray-200 p-1 text-sm"><center>Asignacion</td>
                         <td class="border border-gray-300 font-semibold bg-slate-600 text-gray-200 p-1 text-sm"><center>Proveedor</td>
-                        <td class="border border-gray-300 font-semibold bg-slate-600 text-gray-200 p-1 text-sm"><center>TAG</td>
                         <td class="border border-gray-300 font-semibold bg-slate-600 text-gray-200 p-1 text-sm"><center>Familia</td>
                         <td class="border border-gray-300 font-semibold bg-slate-600 text-gray-200 p-1 text-sm"><center>Modelo</td>
                         <td class="border border-gray-300 font-semibold bg-slate-600 text-gray-200 p-1 text-sm"><center>Precio</td>
@@ -74,7 +73,7 @@
                         <td class="px-3 border border-gray-300 font-light {{$color?'bg-lime-100':''}} text-gray-700 p-1 text-xs">@livewire('inventario.cambiar-asignacion',['id_inventario'=>$registro->id])</td>
                         <td class="px-3 border border-gray-300 font-light {{$color?'bg-lime-100':''}} text-gray-700 p-1 text-xs">{{$registro->asignacion_desc->nombre}}</td>
                         <td class="px-3 border border-gray-300 font-light {{$color?'bg-lime-100':''}} text-gray-700 p-1 text-xs">{{$registro->proveedor_desc->nombre}}</td>
-                        <td class="px-3 border border-gray-300 font-light {{$color?'bg-lime-100':''}} text-gray-700 p-1 text-xs">{{$registro->tag}}</td>
+                        
                         <td class="px-3 border border-gray-300 font-light {{$color?'bg-lime-100':''}} text-gray-700 p-1 text-xs">{{$registro->familia}}</td>
                         <td class="px-3 border border-gray-300 font-light {{$color?'bg-lime-100':''}} text-gray-700 p-1 text-xs">{{$registro->modelo}}</td>
                         <td class="px-3 border border-gray-300 font-light {{$color?'bg-lime-100':''}} text-gray-700 p-1 text-xs"><center>${{number_format($registro->precio,2)}}</td>

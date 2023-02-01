@@ -129,11 +129,17 @@
                             </div>
                             <div class="flex flex-col">
                                 <div class="pl-5 pt-2 text-lime-300">
-                                    <a href="{{route('dashboard')}}">
+                                    <a href="{{route('gasto_nuevo')}}">
                                         <span class="text-green-500"><i class="far fa-money-bill-alt"></i></span>
                                          Registrar Gasto
                                     </a>
-                                </div>        
+                                </div>       
+                                <div class="pl-5 pt-2 text-lime-300">
+                                    <a href="{{route('seguimiento_gastos')}}">
+                                        <span class="text-green-500"><i class="far fa-money-bill-alt"></i></span>
+                                         Seguimiento Gastos
+                                    </a>
+                                </div>   
                              </div>
                              <div class="text pt-2">
                                 <i class="fas fa-tasks"></i>
@@ -153,9 +159,9 @@
                             </div>
                             <div class="flex flex-col">
                                 <div class="pl-5 pt-2 text-lime-300">
-                                    <a href="{{route('dashboard')}}">
+                                    <a href="{{route('reporte_diario')}}">
                                         <span class="text-yellow-500"><i class="fas fa-print"></i></span>
-                                         Reportes
+                                         Reporte diario
                                     </a>
                                 </div>        
                              </div>
