@@ -107,7 +107,7 @@
                              </div>
                              <div class="text pt-2">
                                 <i class="fas fa-tasks"></i>
-                                Inventario
+                                Equipos
                             </div>
                             <div class="flex flex-col">
                                 <div class="pl-5 pt-2 text-lime-300">
@@ -119,9 +119,21 @@
                                 <div class="pl-5 pt-2 text-lime-300">
                                     <a href="{{route('base_inventario')}}">
                                         <span class="text-red-400"><i class="fas fa-warehouse"></i></span>
-                                         Sucursal
+                                         Inventario / Ventas
                                     </a>
-                                </div>       
+                                </div>    
+                                <div class="pl-5 pt-2 text-lime-300">
+                                    <a href="{{route('venta_adicionales')}}">
+                                        <span class="text-yellow-400"><i class="fas fa-headphones"></i></span>
+                                         Adicionales
+                                    </a>
+                                </div>
+                                <div class="pl-5 pt-2 text-lime-300">
+                                    <a href="{{route('seguimiento_adicionales')}}">
+                                        <span class="text-yellow-400"><i class="fas fa-headphones"></i></span>
+                                         Ventas Adicionales
+                                    </a>
+                                </div>        
                              </div>
                              <div class="text pt-2">
                                 <i class="fas fa-tasks"></i>

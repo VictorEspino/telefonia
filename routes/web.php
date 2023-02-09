@@ -5,6 +5,7 @@ use App\Http\Livewire\Usuario\ShowUsuarios;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\GastoController;
 use App\Http\Controllers\ReportesController;
+use App\Http\Controllers\AdicionalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +43,9 @@ Route::get('/gasto_seguimiento',[GastoController::class,'seguimiento_gastos'])->
 Route::post('/gasto_borrar',[GastoController::class,'gasto_borrar'])->middleware('auth');
 
 Route::get('/reporte_diario',[ReportesController::class,'diario'])->middleware('auth')->name('reporte_diario');
+
+
+Route::get('/venta_adicionales',[AdicionalesController::class,'show_nuevo'])->name('venta_adicionales')->middleware('auth');
+Route::post('/venta_adicionales',[AdicionalesController::class,'save_nuevo'])->name('adicionales_nuevo')->middleware('auth');
+Route::get('/adicionales_seguimiento',[AdicionalesController::class,'seguimiento_adicionales'])->name('seguimiento_adicionales')->middleware('auth');
+Route::post('/adicionales_borrar',[AdicionalesController::class,'adicionales_borrar'])->middleware('auth');
