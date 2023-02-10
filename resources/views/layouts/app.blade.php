@@ -125,17 +125,35 @@
                                 <div class="pl-5 pt-2 text-lime-300">
                                     <a href="{{route('venta_adicionales')}}">
                                         <span class="text-yellow-400"><i class="fas fa-headphones"></i></span>
-                                         Adicionales
+                                         Registrar Adicional
                                     </a>
                                 </div>
                                 <div class="pl-5 pt-2 text-lime-300">
                                     <a href="{{route('seguimiento_adicionales')}}">
-                                        <span class="text-yellow-400"><i class="fas fa-headphones"></i></span>
+                                        <span class="text-white"><i class="fas fa-database"></i></span>
                                          Ventas Adicionales
                                     </a>
                                 </div>        
                              </div>
                              <div class="text pt-2">
+                                <i class="fas fa-tasks"></i>
+                                Parcialidades
+                            </div>
+                            <div class="flex flex-col">
+                                <div class="pl-5 pt-2 text-lime-300">
+                                    <a href="{{route('nuevo_parcialidad')}}">
+                                        <span class="text-indigo-500"><i class="fas fa-money-check-alt"></i></i></span>
+                                         Registrar Parcialidad
+                                    </a>
+                                </div>       
+                                <div class="pl-5 pt-2 text-lime-300">
+                                    <a href="{{route('seguimiento_parcialidades')}}">
+                                        <span class="text-indigo-500"><i class="fas fa-money-check-alt"></i></span>
+                                         Parcialidades
+                                    </a>
+                                </div>   
+                            </div>
+                            <div class="text pt-2">
                                 <i class="fas fa-tasks"></i>
                                 Gastos
                             </div>
@@ -160,7 +178,7 @@
                             <div class="flex flex-col">
                                 <div class="pl-5 pt-2 text-lime-300">
                                     <a href="{{route('dashboard')}}">
-                                        <span class="text-green-500"><i class="far fa-money-bill-alt"></i></span>
+                                        <span class="text-red-500"><i class="fas fa-dollar-sign"></i></span>
                                          Pagos de Comisiones
                                     </a>
                                 </div>        

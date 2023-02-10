@@ -133,7 +133,7 @@ class EjecutarVenta extends Component
             'enganche' => 'required|numeric|min:1',
             'forma_pago' => 'required',
             'proveedor_servicio' => 'required',
-            'telefono' => 'required|numeric',
+            'telefono' => 'required|numeric|digits:10',
             'precio_equipo'=>'required|numeric',
             'portabilidad'=>'required',
             'servicio_telefonico'=>'required'

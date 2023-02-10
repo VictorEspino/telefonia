@@ -6,6 +6,7 @@ use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\GastoController;
 use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\AdicionalesController;
+use App\Http\Controllers\PagoParcialidadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +50,8 @@ Route::get('/venta_adicionales',[AdicionalesController::class,'show_nuevo'])->na
 Route::post('/venta_adicionales',[AdicionalesController::class,'save_nuevo'])->name('adicionales_nuevo')->middleware('auth');
 Route::get('/adicionales_seguimiento',[AdicionalesController::class,'seguimiento_adicionales'])->name('seguimiento_adicionales')->middleware('auth');
 Route::post('/adicionales_borrar',[AdicionalesController::class,'adicionales_borrar'])->middleware('auth');
+
+Route::get('/nuevo_parcialidad',[PagoParcialidadController::class,'show_nuevo'])->name('nuevo_parcialidad')->middleware('auth');
+Route::post('/save_parcialidades',[PagoParcialidadController::class,'save_nuevo'])->name('parcialidades_nuevo')->middleware('auth');
+Route::get('/parcialidades_seguimiento',[PagoParcialidadController::class,'seguimiento_parcialidades'])->name('seguimiento_parcialidades')->middleware('auth');
+Route::post('/parcialidades_borrar',[PagoParcialidadController::class,'parcialidades_borrar'])->middleware('auth');
