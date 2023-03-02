@@ -162,6 +162,7 @@ class EjecutarVenta extends Component
             'portabilidad'=>$this->portabilidad,
             'precio_servicio'=>$this->precio_servicio,
             'proveedor'=>$this->proveedor_servicio,
+            'equipo_conciliado'=>$this->proveedor_servicio=='KREDIYA'?1:0,
             'iccid'=>$this->iccid,
         ]);
         

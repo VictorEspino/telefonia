@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-ttds leading-tight">
-            {{ __('Detalle de periodo PAYJOY') }}
+            {{ __('Detalle de periodo KREDIYA') }}<br>Del {{$dia_inicio}} al {{$dia_fin}}
         </h2>
     </x-slot>
     <div class="flex flex-col w-full bg-white text-gray-700 shadow-lg rounded-lg">
         <div class="w-full rounded-t-lg bg-ttds-encabezado p-3 flex flex-row justify-between border-b border-gray-800"> <!--ENCABEZADO-->
             <div>
-            <div class="w-full text-lg font-semibold">Periodos</div>
+            <div class="w-full text-lg font-semibold">Detalle periodo</div>
             <div class="w-full text-sm">({{Auth::user()->usuario}}) - {{Auth::user()->name}}</div>            
             <div class="w-full text-sm">{{App\Models\User::with('locacion_desc')->find(Auth::user()->id)->locacion_desc->nombre}}</div>
             </div>
@@ -21,11 +21,6 @@
                     <a href="javascript:eliminar_estatus()"><span class="font-semibold text-base text-gray-600">X</span></a>
                 </div>        
             </div>    
-        @endif
-        @if(session()->has('failures') || session()->has('error_validacion'))
-        <div class="bg-red-200 p-4 flex justify-center font-bold">
-            El archivo no fue cargado verifique detalles al final de la pagina
-        </div>
         @endif
         <div class="flex flex-col md:space-x-5 md:space-y-0 items-start md:flex-row">
             <div class="w-full md:w-1/2 flex flex-col justify-center md:p-5 p-3">
@@ -83,118 +78,22 @@
                         </div>
                     </div>  
                     <div class="hidden md:block md:w-1/3 md:flex md:justify-center md:p-3">
-                        <img src="/images/payjoy.svg">
+                        <img src="/images/krediya.svg">
                     </div> 
                 </div>
-            </div>
-            <div class="w-full p-3 md:w-1/2 md:p-5 flex flex-col ">
-                <div class="w-full bg-gray-200 p-2 rounded-t-lg">Transacciones PayJoy</div>
-                <div class="w-full pt-2 border-l border-r px-3">
-                    <div class="w-full flex flex-row border-b text-lg font-semibold">
-                        <div class="w-2/3">
-                            Registros
-                        </div>
-                        <div class="w-1/3 border-b flex justify-center">
-                            
-                        </div>
-                    </div>
-                    <div class="w-full flex flex-row border-b text-sm px-3">
-                        <div class="w-2/3">
-                            Equipos
-                        </div>
-                        <div class="w-1/3 border-b flex justify-center flex flex-row">
-                            <div class="w-1/2">
-                                {{$pj_n_equipos}}
-                            </div>
-                            <div class="w-1/2">
-                                ${{number_format($pj_equipos,2)}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full flex flex-row border-b text-sm px-3">
-                        <div class="w-2/3">
-                            Enganches
-                        </div>
-                        <div class="w-1/3 flex justify-center flex flex-row">
-                            <div class="w-1/2">
-                                {{$pj_n_enganches}}
-                            </div>
-                            <div class="w-1/2">
-                                ${{number_format($pj_enganches,2)}}
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="w-full flex flex-row border-b text-sm px-3">
-                        <div class="w-2/3">
-                            Parcialidades
-                        </div>
-                        <div class="w-1/3 flex justify-center flex flex-row">
-                            <div class="w-1/2">
-                                {{$pj_n_parcialidades}}
-                            </div>
-                            <div class="w-1/2">
-                                ${{number_format($pj_parcialidades,2)}}
-                            </div>                            
-                        </div>
-                    </div>
-                    <div class="w-full flex flex-row border-b text-sm px-3 pt-5">
-                        <div class="w-2/3">
-                            Comision fuerza ventas
-                        </div>
-                        <div class="w-1/3 flex justify-center flex flex-row">
-                            <div class="w-1/2">
-                                ${{number_format($pj_com_equipos,2)}}
-                            </div>
-                            <div class="w-1/2">
-                                ${{$pj_n_equipos>0?number_format($pj_com_equipos/$pj_n_equipos,0):0}} (unitario)
-                            </div>                            
-                        </div>
-                    </div>
-                    <div class="w-full flex flex-row border-b text-sm px-3">
-                        <div class="w-2/3">
-                            Comision cobro pacialidades
-                        </div>
-                        <div class="w-1/3 flex justify-center flex flex-row">
-                            <div class="w-1/2">
-                                ${{number_format($pj_com_parcialidades,2)}}
-                            </div>
-                            <div class="w-1/2">
-                                {{$pj_parcialidades>0?number_format(100*$pj_com_parcialidades/$pj_parcialidades,0):0}}%
-                            </div>                            
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full border-r border-l rounded-b-lg shadow-lg pb-5 pt-5">
-
-                    <form method="post" action="{{route('payjoy_import')}}" enctype="multipart/form-data" id="carga_ventas_callidus">
-                        @csrf
-                    <div class="w-full rounded-b-lg p-3 flex flex-col"> <!--CONTENIDO-->
-                        <div class="w-full flex flex-row space-x-2">
-                            <div class="w-4/5">
-                                
-                                <span class="text-xs text-ttds">Archivo Transacciones</span><br>
-                                <input type="hidden" name="semana_negocio_id" value="{{$semana_negocio_id}}" id="semana_negocio_id">
-                                <input class="w-full rounded p-1 border border-gray-300 bg-white" type="file" name="file" value="{{old('file')}}" id="file">
-                                @error('file')
-                                <br><span class="text-xs italic text-red-700 text-xs">{{ $message }}</span>
-                                @enderror                    
-                            </div>
-                            <div class="w-1/5 flex items-end">
-                                <button onClick="carga_ventas_callidus()" type="button" class="rounded px-3 py-2 border text-gray-100 font-semibold bg-[#186D92] hover:bg-ttds-hover">Cargar</button>
-                            </div>                
-                        </div>
-                    </div> <!--FIN CONTENIDO-->
-                    
-                    </form>
-                </div> 
-                <div class="w-full border-b border-r border-l rounded-b shadow-lg">
-                </div>
-            </div>
+            </div>      
+            <div class="w-1/2 p-12 flex justify-center">
+                <button class="border rounded-xl p-5 bg-black text-sm text-gray-100 hover:bg-gray-700" onClick="confirmar_finalizacion()">GUARDAR CONCILIACION</button>
+            </div>      
         </div>
+        <form id="forma_finaliza" method="post" action="{{route('cierra_conciliacion_krediya')}}">
+                    @csrf
+                    <input type="hidden" name="dia_inicio" value="{{$dia_inicio}}">
+                    <input type="hidden" name="dia_fin" value="{{$dia_fin}}">
+                    <input type="hidden" name="semana_negocio_id" value="{{$semana_negocio_id}}">
         <div class="flex flex-col md:space-x-5 md:space-y-0 items-start md:flex-row">
             <div class="w-full md:w-1/2 flex flex-col justify-center md:p-5 p-3">
-                <div class="w-full bg-gray-200 flex flex-col p-2 rounded-t-lg">Registros capturados sin correspondencia en PJ</div>
+                <div class="w-full bg-gray-200 flex flex-col p-2 rounded-t-lg">Registros capturados sin correspondencia en Krediya</div>
                 <div class="w-full flex flex-col border rounded-b-lg shadow-lg pb-5 px-3">  
                     <div class="w-full flex flex-row border-b text-sm text-gray-700 pt-3 font-bold">
                         <div class="w-1/6">Moldelo</div>
@@ -203,6 +102,7 @@
                         <div class="w-1/6">Vendedor</div>
                         <div class="w-1/6">Precio</div>
                         <div class="w-1/6">Enganche</div>
+                        <div class="w-1/6">Conciliado</div>
                     </div>
                     @foreach($reg_sin_conciliar as $registro)
                     <div class="w-full flex flex-row border-b text-sm text-gray-700 pt-2">
@@ -212,134 +112,42 @@
                         <div class="w-1/6 px-2 text-xs">{{$registro->user_desc->name}}</div>
                         <div class="w-1/6 px-2 text-xs">${{number_format($registro->precio_equipo,0)}}</div>
                         <div class="w-1/6 px-2 text-xs">${{number_format($registro->enganche,0)}}</div>
+                        <div class="w-1/6 px-2 text-xs"><input type="checkbox" name="{{$registro->id}}"  {{$registro->equipo_conciliado=='1'?'checked':''}} /></div>
                     </div>
                     @endforeach
                 </div>
             </div>
             <div class="w-full md:w-1/2 flex flex-col justify-center md:p-5 p-3">
-                <div class="w-full bg-gray-200 flex flex-col p-2 rounded-t-lg">Registros in evidencia de captura interna</div>
+                <div class="w-full bg-gray-200 flex flex-col p-2 rounded-t-lg">Registros conciliados con KREDIYA</div>
                 <div class="w-full flex flex-col border rounded-b-lg shadow-lg pb-5 px-3">  
-                    <div class="w-full flex flex-row border-b text-sm text-gray-700 pt-3 font-bold">
+                <div class="w-full flex flex-row border-b text-sm text-gray-700 pt-3 font-bold">
                         <div class="w-1/6">Moldelo</div>
                         <div class="w-1/3 px-2">IMEI</div>
                         <div class="w-1/6">Asignacion</div>
+                        <div class="w-1/6">Vendedor</div>
                         <div class="w-1/6">Precio</div>
-                        <div class="w-1/6">Meses</div>
+                        <div class="w-1/6">Enganche</div>
+                        <div class="w-1/6">Conciliado</div>
                     </div>
-                    @foreach($reg_sin_captura as $registro)
+                    @foreach($reg_conciliados as $registro)
                     <div class="w-full flex flex-row border-b text-sm text-gray-700 pt-2">
-                        <div class="w-1/6 px-2 text-xs">{{$registro->device_model}}</div>
-                        <div class="w-1/3 px-2 text-xs">{{$registro->imei}}</div>
-                        <div class="w-1/6 px-2 text-xs">{{$registro->merchant_name}}</div>
-                        <div class="w-1/6 px-2 text-xs">${{number_format($registro->dinero_payjoy,0)}}</div>
-                        <div class="w-1/6 px-2 text-xs">{{$registro->months}}</div>
+                        <div class="w-1/6 px-2 text-xs">{{$registro->inventario_desc->modelo}}</div>
+                        <div class="w-1/3 px-2 text-xs">{{$registro->inventario_desc->imei}}</div>
+                        <div class="w-1/6 px-2 text-xs">{{$registro->locacion_desc->nombre}}</div>
+                        <div class="w-1/6 px-2 text-xs">{{$registro->user_desc->name}}</div>
+                        <div class="w-1/6 px-2 text-xs">${{number_format($registro->precio_equipo,0)}}</div>
+                        <div class="w-1/6 px-2 text-xs">${{number_format($registro->enganche,0)}}</div>
+                        <div class="w-1/6 px-2 text-xs"><input type="checkbox" name="{{$registro->id}}"  {{$registro->equipo_conciliado=='1'?'checked':''}} /></div>
                     </div>
                     @endforeach
                 </div>
-            </div>
+                
+            </div>            
         </div>
-        
-        @if(session('status'))
-        <div class="bg-green-200 p-4 flex justify-center font-bold rounded-b-lg" id="estatus2">
-            {{session('status')}}
-        </div>
-        @endif
-        @if(session()->has('failures'))
-        <div class="bg-red-200 p-4 flex justify-center font-bold">
-            El archivo no fue cargado!
-        </div>
-        <div class="bg-red-200 p-4 flex justify-center rounded-b-lg">
-            <table class="text-sm">
-                <tr>
-                    <td class="bg-red-700 text-gray-100 px-3">Row</td>
-                    <td class="bg-red-700 text-gray-100 px-3">Columna</td>
-                    <td class="bg-red-700 text-gray-100 px-3">Error</td>
-                    <td class="bg-red-700 text-gray-100 px-3">Valor</td>
-                </tr>
-            
-                @foreach(session()->get('failures') as $validation)
-                <tr>
-                    <td class="px-3"><center>{{$validation->row()}}</td>
-                    <td class="px-3"><center>{{$validation->attribute()}}</td>
-                    <td class="px-3">
-                        <ul>
-                        @foreach($validation->errors() as $e)
-                            <li>{{$e}}</li>
-                        @endforeach
-                        </ul>
-                    </td>
-                    
-                    <td class="px-3"><center>
-                    <?php
-                     try{
-                    ?>    
-                        {{$validation->values()[$validation->attribute()]}}
-                    <?php
-                        }
-                        catch(\Exception $e)
-                        {
-                            ;
-                        }
-                    ?>
-                    </td>
-                </tr>
-                @endforeach
-
-            </table>
-        </div>
-        @endif
-        @if(session()->has('error_validacion'))
-        <div class="bg-red-200 p-4 flex justify-center font-bold">
-            El archivo no fue cargado!
-        </div>
-        <div class="bg-red-200 p-4 flex justify-center rounded-b-lg">
-            <table class="text-sm">
-                <tr>
-                    <td class="bg-red-700 text-gray-100 px-3">Row</td>
-                    <td class="bg-red-700 text-gray-100 px-3">Columna</td>
-                    <td class="bg-red-700 text-gray-100 px-3">Error</td>
-                    <td class="bg-red-700 text-gray-100 px-3">Valor</td>
-                </tr>
-            @foreach(session()->get('error_validacion') as $error)
-                <tr>
-                    <td class="px-3"><center>{{$error["row"]}}</td>
-                    <td class="px-3"><center>{{$error["campo"]}}</td>
-                    <td class="px-3"><center>{{$error["mensaje"]}}</td>
-                    <td class="px-3"><center>{{$error["valor"]}}</td>
-                </tr>
-            @endforeach
-            </table>
-        </div>
-        @endif
+        </form>
     </div>
 <!--MODAL CONFIRMACION-->
-<div class="fixed hidden inset-0 bg-gray-900 bg-opacity-50 overflow-y-auto h-full w-full" id="modal_reabrir">
-    <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-96 shadow-lg rounded-md bg-white">
-        <div class="mt-3 text-center">
-            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-                <i class="text-green-500 text-2xl font-bold far fa-check-circle"></i>
-            </div>
-            <h3 class="text-lg leading-6 font-medium text-gray-900 p-3">¿Desea continuar?</h3>
-            <div class="mt-2 px-7 py-3">
-                <p class="text-sm text-gray-500">
-                    Esta operacion habilitara nuevamente el calculo para procesar informacion faltante, mientras realiza las modificacion el estado de cuenta de cierre no estara disponible para los distribuidores, sera necesario finalizar el calculo nuevamente al terminar las modificaciones.                    
-                </p>
-            </div>
-            <div class="px-4 py-3 flex flex-row">
-                <div class="w-1/2 flex justify-center">
-                    <button onClick="ejecuta_reabrir()" class="px-3 w-2/3 py-2 bg-green-500 text-white text-base font-medium rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
-                        OK
-                    </button>
-                </div>
-                <div class="w-1/2 flex justify-center">
-                    <button onClick="cancelar_reabrir()" class="px-3 w-2/3 py-2 bg-red-500 text-white text-base font-medium rounded-md shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-green-300">
-                        Cancelar
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="fixed hidden inset-0 bg-gray-900 bg-opacity-50 overflow-y-auto h-full w-full" id="modal_finalizacion">
     <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-96 shadow-lg rounded-md bg-white">
         <div class="mt-3 text-center">
@@ -349,7 +157,7 @@
             <h3 class="text-lg leading-6 font-medium text-gray-900 p-3">¿Desea continuar?</h3>
             <div class="mt-2 px-7 py-3">
                 <p class="text-sm text-gray-500">
-                    Esta operacion dara por finalizado el calculo de comisiones y lo pondra disponible para los distribuidores, no se podran realizar mas cambios.
+                    Esta operacion dara por finalizado la conciliacion con KREDIYA, los registros conciliados estaran listos para pago de comisiones internas
                 </p>
             </div>
             <div class="px-4 py-3 flex flex-row">
@@ -360,60 +168,6 @@
                 </div>
                 <div class="w-1/2 flex justify-center">
                     <button onClick="cancelar_finalizacion()" class="px-3 w-2/3 py-2 bg-red-500 text-white text-base font-medium rounded-md shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-green-300">
-                        Cancelar
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="fixed hidden inset-0 bg-gray-900 bg-opacity-50 overflow-y-auto h-full w-full" id="modal_reset">
-    <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-96 shadow-lg rounded-md bg-white">
-        <div class="mt-3 text-center">
-            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-                <i class="text-green-500 text-2xl font-bold far fa-check-circle"></i>
-            </div>
-            <h3 class="text-lg leading-6 font-medium text-gray-900 p-3">¿Desea continuar?</h3>
-            <div class="mt-2 px-7 py-3">
-                <p class="text-sm text-gray-500">
-                    Esta accion eliminara todo registro presente en el calculo, incluyendo las cargas de los archivos de Callidus.
-                </p>
-            </div>
-            <div class="px-4 py-3 flex flex-row">
-                <div class="w-1/2 flex justify-center">
-                    <button onClick="ejecuta_reset()" class="px-3 w-2/3 py-2 bg-green-500 text-white text-base font-medium rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
-                        OK
-                    </button>
-                </div>
-                <div class="w-1/2 flex justify-center">
-                    <button onClick="cancelar_reset()" class="px-3 w-2/3 py-2 bg-red-500 text-white text-base font-medium rounded-md shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-green-300">
-                        Cancelar
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="fixed hidden inset-0 bg-gray-900 bg-opacity-50 overflow-y-auto h-full w-full" id="modal_reset">
-    <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-96 shadow-lg rounded-md bg-white">
-        <div class="mt-3 text-center">
-            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-                <i class="text-green-500 text-2xl font-bold far fa-check-circle"></i>
-            </div>
-            <h3 class="text-lg leading-6 font-medium text-gray-900 p-3">¿Desea continuar?</h3>
-            <div class="mt-2 px-7 py-3">
-                <p class="text-sm text-gray-500">
-                    Esta accion eliminara todo registro presente en el calculo, incluyendo las cargas de los archivos de Callidus.
-                </p>
-            </div>
-            <div class="px-4 py-3 flex flex-row">
-                <div class="w-1/2 flex justify-center">
-                    <button onClick="ejecuta_reset()" class="px-3 w-2/3 py-2 bg-green-500 text-white text-base font-medium rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
-                        OK
-                    </button>
-                </div>
-                <div class="w-1/2 flex justify-center">
-                    <button onClick="cancelar_reset()" class="px-3 w-2/3 py-2 bg-red-500 text-white text-base font-medium rounded-md shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-green-300">
                         Cancelar
                     </button>
                 </div>
@@ -477,79 +231,12 @@
 
 
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <script type="text/javascript">
-        google.charts.load('current', {'packages':['gauge']});
-        google.charts.setOnLoadCallback(drawChart);
-        google.charts.setOnLoadCallback(drawChart2);
-        google.charts.setOnLoadCallback(drawChart3);
-
-        function drawChart() {
-
-            var data = google.visualization.arrayToDataTable([
-            ['Label', 'Value'],
-            ['', 0],
-            ]);
-
-            var options = {
-            width: 400, height: 120,
-            redFrom: 0, redTo: 80,
-            yellowFrom:80, yellowTo: 90,
-            greenFrom:90, greenTo: 100,
-            minorTicks: 5
-            };
-
-            var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-
-            chart.draw(data, options);
-        }
-        function drawChart2() 
-        {
-            var data = google.visualization.arrayToDataTable([
-            ['Label', 'Value'],
-            ['', 0],
-            ]);
-
-            var options = {
-            width: 300, height: 100,
-            redFrom: 0, redTo: 80,
-            yellowFrom:80, yellowTo: 90,
-            greenFrom:90, greenTo: 100,
-            minorTicks: 5
-            };
-
-            var chart = new google.visualization.Gauge(document.getElementById('chart_div_2'));
-
-            chart.draw(data, options);
-        }
-        function drawChart3() 
-        {
-            var data = google.visualization.arrayToDataTable([
-            ['Label', 'Value'],
-            ['', 0],
-            ]);
-
-            var options = {
-            width: 300, height: 100,
-            redFrom: 0, redTo: 80,
-            yellowFrom:80, yellowTo: 90,
-            greenFrom:90, greenTo: 100,
-            minorTicks: 5
-            };
-
-            var chart = new google.visualization.Gauge(document.getElementById('chart_div_3'));
-
-            chart.draw(data, options);
-        }
         function ejecuta_finalizacion() 
         {
             document.getElementById('forma_finaliza').submit();
         }
-        function ejecuta_reabrir() 
-        {
-            document.getElementById('forma_reabrir').submit();
-        }
-
         function confirmar_finalizacion()
         {
             document.getElementById('modal_finalizacion').style.display="block"
@@ -557,53 +244,6 @@
         function cancelar_finalizacion()
         {
             document.getElementById('modal_finalizacion').style.display="none"
-        }
-
-        function confirmar_reabrir()
-        {
-            document.getElementById('modal_reabrir').style.display="block"
-        }
-        function cancelar_reabrir()
-        {
-            document.getElementById('modal_reabrir').style.display="none"
-        }
-
-        function confirmar_reset()
-        {
-            document.getElementById('modal_reset').style.display="block"
-        }
-        function ejecuta_reset()
-        {
-            document.getElementById('forma_reset').submit();
-        }
-        function cancelar_reset()
-        {
-            document.getElementById('modal_reset').style.display="none"
-        }
-        function ejecuta_calculo(tipo)
-        {
-            document.getElementById('modal_procesa').style.display="block";
-            if(tipo==1){
-                document.getElementById('mensaje').innerHTML = "Ejecutando Adelanto";
-                document.getElementById('forma_adelanto').submit();
-                }
-            if(tipo==2){
-                document.getElementById('mensaje').innerHTML = "Ejecutando Cierre";
-                document.getElementById('forma_cierre').submit();
-                }
-                
-        }
-        function carga_ventas_callidus()
-        {
-            document.getElementById('modal_procesa').style.display="block";
-            document.getElementById('mensaje').innerHTML = "Cargando Ventas Callidus";
-            document.getElementById('carga_ventas_callidus').submit();
-        }
-        function carga_residual_callidus()
-        {
-            document.getElementById('modal_procesa').style.display="block";
-            document.getElementById('mensaje').innerHTML = "Cargando Residual";
-            document.getElementById('carga_residual_callidus').submit();
         }
         @if(session('status')!='')
 

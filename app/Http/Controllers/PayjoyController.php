@@ -35,7 +35,7 @@ class PayjoyController extends Controller
 
 
         $equipos=$ventas->equipos;
-        $enganches=$ventas->n_equipos;
+        $enganches=$ventas->enganches;
         $parcialidades=$parcialidades_reg->parcialidades;
 
         $n_equipos=$ventas->n_equipos;
@@ -92,6 +92,7 @@ class PayjoyController extends Controller
 
         $sin_conciliar=Venta::with('user_desc','locacion_desc','inventario_desc')
                         ->where('equipo_conciliado',0)
+                        ->where('proveedor','PAYJOY')
                         ->whereRaw('lpad(created_at,10,0)>=? and lpad(created_at,10,0)<=?',[$dia_inicio,$dia_fin])
                         ->get();
 
@@ -103,6 +104,8 @@ class PayjoyController extends Controller
                                ->get();
 
         return(view('conciliacion.detalle_payjoy',['semana_negocio_id'=>$semana_negocio_id,
+                                                    'dia_inicio'=>$dia_inicio,
+                                                    'dia_fin'=>$dia_fin,
                                                     'n_equipos'=>$n_equipos,
                                                     'equipos'=>$equipos,
                                                     'enganches'=>$enganches,

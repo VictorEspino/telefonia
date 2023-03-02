@@ -22,6 +22,7 @@ class Venta extends Model
             'precio_servicio',
             'proveedor',
             'iccid',
+            'equipo_conciliado',
         ];
     public function user_desc()
     {

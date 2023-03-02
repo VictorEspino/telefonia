@@ -20,7 +20,7 @@
                             <div class="w-full text-xl text-yellow-500 font-bold flex justify-start"><i class="fas fa-th-large"></i></div>
                             <div class="w-full text-xl text-gray-500 font-bold flex justify-start">Corte semanal</div>
                             <div class="w-full text-xs text-gray-700 flex justify-start">De {{$periodo->dia_inicio}} a {{$periodo->dia_fin}}</div>
-                            <div class="w-full text-lg text-gray-700 font-semibold flex justify-start">{{$periodo->conciliado==1?'CONCILIADO':'PENDIENTE'}}</div>                
+                            <div class="w-full text-lg {{$periodo->conciliado==1?'text-green-500':'text-red-500'}} font-semibold flex justify-start">{{$periodo->conciliado==1?'CONCILIADO':'PENDIENTE'}}</div>                
                         </div>
                     </div>
                     <div class="w-1/6 text-3xl font-thin text-gray-500 flex flex-col text-center">                        

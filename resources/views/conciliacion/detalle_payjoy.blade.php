@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-ttds leading-tight">
-            {{ __('Detalle de periodo PAYJOY') }}
+            {{ __('Detalle de periodo PAYJOY') }}<br>Del {{$dia_inicio}} al {{$dia_fin}}
         </h2>
     </x-slot>
     <div class="flex flex-col w-full bg-white text-gray-700 shadow-lg rounded-lg">
         <div class="w-full rounded-t-lg bg-ttds-encabezado p-3 flex flex-row justify-between border-b border-gray-800"> <!--ENCABEZADO-->
             <div>
-            <div class="w-full text-lg font-semibold">Periodos</div>
+            <div class="w-full text-lg font-semibold">Detalle periodo</div>
             <div class="w-full text-sm">({{Auth::user()->usuario}}) - {{Auth::user()->name}}</div>            
             <div class="w-full text-sm">{{App\Models\User::with('locacion_desc')->find(Auth::user()->id)->locacion_desc->nombre}}</div>
             </div>

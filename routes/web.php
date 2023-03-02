@@ -9,6 +9,7 @@ use App\Http\Controllers\AdicionalesController;
 use App\Http\Controllers\PagoParcialidadController;
 use App\Http\Controllers\ConciliacionController;
 use App\Http\Controllers\PayjoyController;
+use App\Http\Controllers\KrediyaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,4 +62,5 @@ Route::post('/parcialidades_borrar',[PagoParcialidadController::class,'parcialid
 Route::get('/periodos_negocio/{proveedor}',[ConciliacionController::class,'periodos'])->middleware('auth')->name('periodos');
 Route::post('/payjoy_import',[PayjoyController::class,'payjoy_import'])->middleware('auth')->name('payjoy_import');
 Route::get('/detalle_payjoy/{semana_negocio_id}',[PayjoyController::class,'detalle_periodo'])->name('detalle_payjoy')->middleware('auth');
-Route::get('/detalle_krediya/{semana_negocio_id}',[PayjoyController::class,'detalle_periodo'])->name('detalle_krediya')->middleware('auth');
+Route::get('/detalle_krediya/{semana_negocio_id}',[KrediyaController::class,'detalle_periodo'])->name('detalle_krediya')->middleware('auth');
+Route::post('/cierra_conciliacion_krediya',[KrediyaController::class,'cierra_conciliacion'])->middleware('auth')->name('cierra_conciliacion_krediya');
