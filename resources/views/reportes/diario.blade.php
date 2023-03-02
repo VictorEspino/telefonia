@@ -21,6 +21,8 @@
             </div>
 
             <div class="w-full flex justify-center pt-5 flex-col text-center"> <!--TABLA DE CONTENIDO-->
+            <div class="w-full flex flex-row">
+            <div class="w-full flex flex-col">
                 <div class="w-full flex justify-center pb-3"><span class="font-semibold text-sm text-gray-700">Reporte del dia {{$query}}</span></div>
                 <!--PAYJOY-->
                 <div class="w-full flex justify-center flex-row">
@@ -307,9 +309,14 @@
                             @endforeach
                         </div>
                     </div>
-                    <div class="w-1/4"></div>
+                    <div class="w-1/4 flex items-start text-center">
+                    </div>
                 </div>
                 <!--END PAYJOY-->
+            </div>
+                <div>NADA
+</div>
+            </div>
             </div><!--FIN DE TABLA -->
 
         </div> <!-- FIN DEL CONTENIDO -->

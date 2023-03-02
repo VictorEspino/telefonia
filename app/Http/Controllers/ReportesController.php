@@ -75,6 +75,10 @@ class ReportesController extends Controller
         $ventas_dia=DB::select(DB::raw($sql_ventas_dia));
         $ventas_semana=DB::select(DB::raw($sql_ventas_semana));
         $ventas_mes=DB::select(DB::raw($sql_ventas_mes));
+
+
+
+
         return view('reportes.diario',['query'=>$query,'ventas_dia'=>$ventas_dia,'ventas_semana'=>$ventas_semana,'ventas_mes'=>$ventas_mes]);
     }
 }

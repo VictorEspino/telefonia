@@ -152,6 +152,7 @@ class EjecutarVenta extends Component
         Venta::create([
             'inventario_id'=>$this->id_inventario,
             'user_id'=>Auth::user()->id,
+            'locacion_id'=>Auth::user()->locacion,
             'cliente'=>$this->cliente,
             'enganche'=>$this->enganche,
             'forma_pago'=>$this->forma_pago,

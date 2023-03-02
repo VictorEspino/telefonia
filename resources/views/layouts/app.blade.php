@@ -185,6 +185,26 @@
                              </div>
                              <div class="text pt-2">
                                 <i class="fas fa-tasks"></i>
+                                Conciliaciones
+                            </div>
+                            <div class="flex flex-col">
+                                <div class="pl-5 pt-2 text-lime-300">
+                                    <a href="{{route('periodos',['proveedor'=>'PAYJOY'])}}">
+                                        <span class="text-blue-500"><i class="fas fa-chart-pie"></i></span>
+                                         PAYJOY
+                                    </a>
+                                </div>        
+                             </div>
+                             <div class="flex flex-col">
+                                <div class="pl-5 pt-2 text-lime-300">
+                                    <a href="{{route('periodos',['proveedor'=>'KREDIYA'])}}">
+                                        <span class="text-blue-500"><i class="fas fa-chart-pie"></i></span>
+                                         KREDIYA
+                                    </a>
+                                </div>        
+                             </div>
+                             <div class="text pt-2">
+                                <i class="fas fa-tasks"></i>
                                 Reportes
                             </div>
                             <div class="flex flex-col">
