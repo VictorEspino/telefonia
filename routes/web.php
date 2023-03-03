@@ -10,6 +10,7 @@ use App\Http\Controllers\PagoParcialidadController;
 use App\Http\Controllers\ConciliacionController;
 use App\Http\Controllers\PayjoyController;
 use App\Http\Controllers\KrediyaController;
+use App\Http\Controllers\ComisionesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,3 +65,9 @@ Route::post('/payjoy_import',[PayjoyController::class,'payjoy_import'])->middlew
 Route::get('/detalle_payjoy/{semana_negocio_id}',[PayjoyController::class,'detalle_periodo'])->name('detalle_payjoy')->middleware('auth');
 Route::get('/detalle_krediya/{semana_negocio_id}',[KrediyaController::class,'detalle_periodo'])->name('detalle_krediya')->middleware('auth');
 Route::post('/cierra_conciliacion_krediya',[KrediyaController::class,'cierra_conciliacion'])->middleware('auth')->name('cierra_conciliacion_krediya');
+
+Route::get('/periodos_comisiones',[ComisionesController::class,'periodos'])->middleware('auth')->name('periodos_comisiones');
+Route::get('/detalle_comisiones/{id}',[ComisionesController::class,'detalle_comisiones'])->middleware('auth')->name('detalle_comisiones');
+Route::post('/calculo_comisiones',[ComisionesController::class,'calculo_comisiones'])->middleware('auth')->name('calculo_comisiones');
+
+Route::get('/export_ejecutivos/{id}',[ComisionesController::class,'export_ejecutivos'])->middleware('auth')->name('export_ejecutivos');

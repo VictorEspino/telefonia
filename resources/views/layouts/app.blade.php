@@ -177,7 +177,7 @@
                             </div>
                             <div class="flex flex-col">
                                 <div class="pl-5 pt-2 text-lime-300">
-                                    <a href="{{route('dashboard')}}">
+                                    <a href="{{route('periodos_comisiones')}}">
                                         <span class="text-red-500"><i class="fas fa-dollar-sign"></i></span>
                                          Pagos de Comisiones
                                     </a>

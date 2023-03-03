@@ -596,7 +596,7 @@
         function carga_ventas_callidus()
         {
             document.getElementById('modal_procesa').style.display="block";
-            document.getElementById('mensaje').innerHTML = "Cargando Ventas Callidus";
+            document.getElementById('mensaje').innerHTML = "Cargando Archivo";
             document.getElementById('carga_ventas_callidus').submit();
         }
         function carga_residual_callidus()
